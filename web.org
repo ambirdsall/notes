@@ -1,0 +1,368 @@
+* How websites get served
+** index.html is special
+	When you navigate to a URL, your browser automatically looks for
+	index.html at that location
+* _HTML_
+** Tags, sort of alphabetically
+*** taxonomy:
+**** <html>
+***** <head>
+****** <title>
+***** <body>
+****** <address>
+		 Contains address information related to the nearest <article> or
+		 <body> element, often contained within a <footer> element.
+****** <article>
+		 HTML5 semantic
+		 Contains content that is a standalone body of work
+****** <aside>
+		 HTML5 semantic
+
+****** <br />
+		 line break
+****** <footer>
+		 HTML5 semantic
+****** <h1>-<h6>
+****** <header>
+		 HTML5 semantic
+		 Any number of headers in a page is valid.
+****** <hr />
+		 horizontal rule. Adds a horizontal line to divide content.
+****** <nav>
+		 HTML5 semantic
+****** <p>
+****** <section>
+		 HTML5 semantic
+		 Like a <div>, but less generically named. Like an <article>, but
+		 less self-contained.
+* _CSS_
+** How CSS Gets Evaluated
+*** Browsers handle pages as a stream
+**** The style of an element is evaluated when it gets created
+***** First ~body~, as if it were empty
+		Since for all that fucker knows, it is.
+***** Then ~div.content~ or whatever
+***** Repaint ~body~ if necessary
+		If, e.g., there's a change in height/width or whatnot
+***** And so on, down the tree.
+**** CSS is evaluated right-to-left
+	  "If you have a rule like body div#content p { color: #003366; }
+	  then for every element—as it gets rendered to the page—it will
+	  first ask if it is a paragraph element. If it is then it will work
+	  its way up the DOM and ask if it is a div with an ID of
+	  content. If it finds what it is looking for, it will continue its
+	  way up the DOM until it reaches the body.
+
+	  By working right to left, the browser can determine whether a rule
+	  applies to this particular element that it is trying to paint to
+	  the viewport much faster. To determine which rule is more or less
+	  performant, you need to figure out how many nodes need to be
+	  evaluated to determine whether a style can be applied to an
+	  element."
+
+	  #+BEGIN_SRC css
+	  .some-class > p {};
+	  #+END_SRC
+	  So to evaluate shit like that, EVERY SINGLE P TAG has
+	  to be checked, along with its parent tag, because that's the
+	  right-most criterion: "is a p-tag".
+
+	  Think of selectors like a series of nested if-statements: the
+	  above case translates to:
+	  #+BEGIN_SRC ruby
+	  if node == p do
+		 if node.parent.class.include? "some-class" do
+			apply_stylez
+		 end
+	  end
+	  #+END_SRC
+	  And that's horseshit code. That inner conditional will get run all
+	  the damn day, which is not performant. It won't kill you on a
+	  small page, but it sure as shit ain't best practice.
+**** selectors
+** taxonomy:
+*** Properties
+**** Layout
+***** display:
+****** block;
+		 The element is displayed on a new line, as in a new paragaph.
+****** list-item;
+		 The element is displayed on a new line with a list-item mark
+		 (bullet point or whatnot) next to it.
+****** inline;
+		 Does what it says on the tin.
+****** none;
+		 invisible as a motherfuck
+***** width: && height:
+****** em
+****** rem
+		 "root em": sizes by proportion of page root, not of containing
+		 element: i.e., proportional to the page as a whole.
+****** %
+****** px
+****** pt
+		 As in fonts, typically
+****** in
+****** cm
+****** mm
+***** absolute vs relative
+****** Absolute
+****** Relative
+***** float:
+***** clear:
+***** fixed:
+***** align:
+***** margin vs padding
+****** margin is the space OUTSIDE the boundary of an element
+		 + margin-top
+		 + margin-right
+		 + margin-bottom
+		 + margin-left
+****** padding is the space outside the content, INSIDE the boundary
+**** Shorthand Properties
+***** prop: t, r, b, l
+***** prop: t, rl, b
+***** prop: tb, rl
+***** prop: trbl
+**** Formatting
+***** border
+****** border:
+*** Selectors
+**** Specificity
+1) IDs
+2) classes
+**** Pseudoselectors
+***** :hover
+** Design Patterns/Philosophies
+*** SMACSS :: Scalable and Modular Architecture for CSS
+	 Two core goals:
+	 1) Increase the semantic value of a section of HTML and content
+	 2) Decrease the expectation of a specific HTML structure
+**** 5 Categories of Style Rules
+***** Base
+****** Definition
+		 Base rules are the defaults. They are almost exclusively single
+		 element selectors but it could include attribute selectors
+		 pseudo-class selectors, child selectors or sibling
+		 selectors. Essentially, a base style says that wherever this element
+		 is on the page, it should look like this.
+
+		 Base styles don't typically include any class or ID selectors: they
+		 rather define the defaults that other selectors can override.
+
+		 A classic example is a reset.
+
+		 #+NAME: Base Examples
+		 #+BEGIN_SRC css
+		 html, body, form { margin: 0; padding: 0; }
+		 input[type=text] { border: 1px solid #999; }
+		 a { color: #039; }
+		 a:hover { color: #03C; }
+		 #+END_SRC
+****** Suggestions
+		 Base styles include setting heading sizes, default link styles, default font styles, and body backgrounds. There should be no need to use !important in a Base style.
+
+		 "I highly recommended that you specify a body background. Some users
+		 may define their own background as something other than white. If you
+		 work off the expectation that the background will be white, your
+		 design may look broken. Worse, your font colour choice may clash with
+		 the user’s setting and make your site unusable."
+
+***** Layout
+****** Definition
+		 There is a qualitative distinction between layouts dictating the
+		 major and minor components of a page. The minor components--a
+		 callout, login form, nav item, &c--are contained with the scope
+		 of major elements like a header or footer.
+
+		 Layout styles are those major components; the minor ones are
+		 Modules.
+
+****** Major and minor layout styles
+		 Major layout styles are large, typically unique components that
+		 are traditionally styled using IDs. I'm not wild about using IDs
+		 in CSS at all, though this might evolve.
+
+****** Example Code
+		 #+NAME: Layout Declarations
+		 #+BEGIN_SRC css
+		 .l-header, #article, #footer {
+			  width: 960px;
+			  margin: auto;
+		 }
+
+		 .l-article {
+			  border: solid .l-CCC;
+			  border-width: 1px 0 0;
+		 }
+
+		 .l-article {
+			  float: left;
+		 }
+
+		 .l-sidebar {
+			  float: right;
+		 }
+
+		 .l-flipped .l-article {
+			  float: right;
+		 }
+
+		 .l-flipped .l-sidebar {
+			  float: left;
+		 }
+		 #+END_SRC
+***** Module
+****** Definition
+		 Modules are the reusable, modular parts of our design. They are
+		 the callouts, the sidebar sections, the product lists and so on.
+
+		 Modules are the main part of most sites.
+****** Subclassing
+		 Using child or descendant selectors is okay iff they will ALWAYS
+		 behave a given way. But those fuckers basically never do, of
+		 course.
+
+		 * _Only include selectors with semantic meaning_
+		 * Use a subclass rather than conditional styling based on
+			location, which is brittle af
+			#+NAME: Styling a Subclass
+			#+BEGIN_SRC css
+			.something {
+			  width: 100%
+			  /* other styling */
+			}
+			.something-constrained {
+			  width: 50%
+			}
+			#+END_SRC
+			#+NAME: Using That Subclass in HTML
+			#+BEGIN_SRC html
+			<tag class="something something-constrained"></tag>
+			#+END_SRC
+***** State
+****** Definition
+		 State rules are ways to describe how our modules or layouts will
+		 look when in a particular state. Is it hidden or expanded? Is it
+		 active or inactive? They are about describing how a module or
+		 layout looks on screens that are smaller or bigger. Although,
+		 real talk, not sure why you'd use this shit instead of a set of
+		 breakpoints for that. ANYWAY.
+
+		 1) State styles can apply to layout and/or module styles; and
+		 2) State styles indicate a JS dependency
+
+		 Standard namespacing: is-
+
+****** !important
+		 Since state styles often override more complex rule sets, using
+		 ~!important~ can make a boatload of sense. As ever, don't be a
+		 dumbass with ~!important~ and fuck everything up, and don't use
+		 it if the styling works without it.
+
+****** Combining State with Modules
+		 Sometimes, shit is unavoidable: state is specific to a certain
+		 module and so is its styling and that's just how it is.
+
+		 * State class name should include module name, e.g. ~.is-tab-active~
+		 * Its rules should live with the module, not the other states.
+
+****** Example Code
+		 #+NAME: Stateful HTML
+		 #+BEGIN_SRC html
+		 <div class="l-header is-collapsed">
+			  <form>
+					<div class="msg is-error">
+						 There is an error!
+					</div>
+					<!--label hidden from view, but included for screen readers-->
+					<label for="searchbox" class="is-hidden">Search</label>
+					<input type="search" id="searchbox">
+			  </form>
+		 </div>
+		 #+END_SRC
+***** Theme
+****** Definition
+		 A set of colors and images that give a site a certain feel. Can
+		 be similar to layout, module, even base styles: the defining
+		 characteristic is that Theme styles are separated out into nice
+		 modular code so you can switch themes.
+****** Don't Namespace Themes Stupidly: Namespace Them Well
+***** Font styles Work Like Themes (I18n) But Are Conceptually Different
+**** ...And Their Naming Conventions
+	  Use prefixes to differentiate between:
+	  - Layout:: l- layout- grid- etc
+	  - State:: is-
+	  - Module:: name of module
+		 #+NAME: Prefix Examples
+		 #+BEGIN_SRC css
+		 /* Example Module */
+		 .example { }
+
+		 /* Callout Module */
+		 .callout { }
+
+		 /* Callout Module with State */
+		 .callout.is-collapsed { }
+
+		 /* Form field module */
+		 .field { }
+
+		 /* Inline layout  */
+		 .l-inline { }
+		 #+END_SRC
+**** Depth of Applicability
+***** How Many "Generations" of HTML Do Your Selectors Go Through?
+		: body.article > #main > #content > #intro > p > b
+		goes through 6 generations. And fucking sucks.
+		: .article #intro b
+		is sneakier about it, but it ALSO touches 6 levels.
+****** Extract design patterns into classes and SHAZAM, a depth of 1.
+******* That shit is reusable as fuck, all over the goddamn place.
+
+*** Atomic
+**** Atoms
+**** Molecules
+* _[BD]OM API_
+** <<window>> -- the root of the Browser Object Model
+	Not technically part of the DOM spec, but supported by all major
+	browsers. There is one ~window~ object per browser window, and
+	one other per ~<iframe>~. Parent of all the objects in a
+	browser-rendered document. ~window.foo~ is redundant, typically.
+*** location
+**** <<location.href>>
+*** history
+*** navigator
+*** document -- the root of the Document Object Model
+===== PROPERTIES =========================================================
+**** <<document.URL>>
+	  read-only. Contains the URL. See [[location.href]]
+**** <<location.protocol>>
+	  Contains the protocol portion of the URL
+**** <<location.hostname>>
+	  e.g. `www.google.com`
+**** <<location.port>>
+	  The integer port number.
+**** <<location.pathname>>
+	  The portion of the URL between the [[<<location.hostname>>][hostname]] and the [[<<location.search>>][query string]],
+	  if any.
+**** <<location.search>>
+	  The query string.
+**** <<location.host>>
+	  The [[<<location.hostname][hostname]] and [[<<location.port>>][port]] combined, as `www.google.com:80`
+**** <<location.hash>>
+	  The portion of the URL following the `#`, if any; the anchor portion.
+===== METHODS =============================================================
+**** location.assign()
+**** location.reload()
+**** location.replace()
+* _Application model_
+  Compared to native apps, which have hella friction (app store, click
+  click click, etc), the web has solved distribution. Which is the
+  hardest problem! Possible to load and, given repeat usage (the best
+  measure of engagement), cache a UI. Now you're not tethered to your
+  web connection any more. Serve the shell of the app with a service
+  worker and use the network (if present) to serve changable content.
+
+** manifest
+** service worker

@@ -1,0 +1,6 @@
+* html5 boilerplate
+  html:5
+* multiples for structured repetition
+  * $ for numbering
+	 i.e. b.$$*2 == <b class="01"></b><b class="02"></b>
+  * 

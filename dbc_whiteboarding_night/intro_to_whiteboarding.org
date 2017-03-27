@@ -1,0 +1,135 @@
+#+TITLE: Intro to whiteboarding!
+
+* Whiteboarding is NOT programming
+** simplicity vs efficiency
+   | Programming                 | Whiteboarding                            |
+   |-----------------------------+------------------------------------------|
+   | simplicity > efficiency     | efficiency > simplicity                  |
+** autocomplete
+   | Programming                                            | Whiteboarding      |
+   |--------------------------------------------------------+--------------------|
+   | autocomplete <3 <3 <3                                  | no autocomplete :( |
+   | editor can find some bugs (like syntax errors) for you | lol, NOPE          |
+** finding bugs
+   | Programming                        | Whiteboarding                       |
+   |------------------------------------+-------------------------------------|
+   | code breaks when you try to run it | you have to find bugs by hand, just |
+   |                                    | by reading your code                |
+** Time and Space efficiency
+   | Programming          | Whiteboarding                                               |
+   |----------------------+-------------------------------------------------------------|
+   | Big O rarely matters | Big O is probably the single most common follow-up question |
+   |                      | and is a primary reason to pick one algorithm over another  |
+** The primary reason it exists as an activity
+   | Programming       | Whiteboarding                                  |
+   |-------------------+------------------------------------------------|
+   | getting shit done | demonstrating your thought process and problem |
+   |                   | solving abilities                              |
+
+* Why whiteboarding, though?
+** A historical accident, like almost everything
+  * computer time was still pretty expensive in the late 80s/early 90s
+  * whiteboards were easy to come by, though
+  * almost everyone comes from university backgrounds, where
+    "professor drawing on board to explain code" is a familiar model
+* How to whiteboard?
+** What is not expected
+*** to know the answers
+*** to solve immediately
+*** to code perfectly
+** What IS expected
+*** figure out an answer, even if it's not perfect
+*** write real code
+*** systematically check that code for bugs
+**** any variables get assigned the wrong value? Check!
+**** does any data get skipped by accident?
+** Listen for clues!
+** Ask clarifying questions
+   You'll get better answers from a real interviewer than you will
+   tonight ¯\_(ツ)_/¯
+** Draw an example
+   Walking through a real example can be SO HELPFUL, even just to observe the
+   common-sense human strategy
+*** start with one that's big enough to show the actual complexity of the problem
+*** avoid artificially convenient cases
+**** only one match
+**** data happens to be in sorted order
+*** Once you have an example case, walk through it!
+**** figure out the input for that one input
+**** Don't worry about your implementation yet! Just use common sense.
+** *Figure out your whole algorithm before you start writing code*
+*** *If you take one strategy away from this talk, make it this.*
+** Code style matters, even on a whiteboard!
+   Inconsistency is a red flag, so whatever indentation and naming conventions
+   you choose, stick to them.
+* Top Ten Mistakes Candidates Make
+** only practicing on a computer
+** trying to memorize solutions
+** not asking questions
+** talking too little
+** not checking/debugging your solution
+** ignoring tips from the interviewer
+** rushing
+*** incomplete (but sensible and careful) > fast (but sloppy or wrong)
+** talking too much
+** sloppy coding
+** giving up
+*** Companies want someone who is excited by hard problems!
+* Tips!
+** the interviewer is there to help you
+** "tricks" that feel like ugly performance hacks are often useful
+   For example, checking values from an array by keeping track of one or more
+   index yourself is something you'd almost never do in normal ruby, but often
+   is vital to finding most efficient solution possible.
+*** example: ~is_palindrome?~
+    #+BEGIN_SRC ruby
+    # easy to read, easy to understand, fast enough for most every use case in
+    # the real world; checks every letter of the string between 3 and 5 times
+    def is_palindrome?(string)
+      # strip spaces and punctuation, normalize capitalization
+      cleaned = string.gsub(/[^a-zA-Z]/, "").downcase
+
+      cleaned == cleaned.reverse
+    end
+
+    # Terrible to read, but checks each character AT MOST once
+    def is_palindrome?(string)
+      first_index = 0
+      last_index = string.length - 1
+
+      until first_index >= last_index
+        # advance pointers past any spaces or punctuation, being careful not
+        # to go past either end of the string
+        if ( string[first_index] =~ /[^a-zA-Z]/ && first_index < string.length )
+          first_index += 1
+        elsif ( string[last_index] =~ /[^a-zA-Z]/ && last_index > -1 )
+          last_index -= 1
+        else
+          # normalize capitalization and compare. If the letters don't match,
+          # the string is not a palindrome
+          return false if string[first_index].downcase != string[last_index].downcase
+
+          # otherwise, advance the pointers to the next letters and on we go
+          first_index += 1
+          last_index -= 1
+        end
+      end
+
+      # if you manage to scan the whole string without ever returning `false`,
+      # congrats! You've got a palindrome.
+      true
+    end
+    #+END_SRC
+** use common-sense helper methods liberally
+*** It keeps your code organized and readable
+*** Depending on the interview, you may never need to actually implement them
+**** no code has fewer bugs than no code
+** start writing in the upper-left corner!
+** come up with good descriptive names, then abbreviate them
+*** no interviewer wants to watch you write stuff out, honest
+** try to write straight
+*** sloppy handwriting isn't a criterion, but keep your indentation clear
+** just because you "finished" doesn't mean you're done
+*** walk through some simple edge cases! Try to find a bug!
+*** try to find a more efficient solution!
+** enjoy the challenge!

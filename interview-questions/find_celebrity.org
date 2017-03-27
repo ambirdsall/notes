@@ -1,0 +1,25 @@
+Write a method =find_celebrity(graph, population_count)= that returns the celebrity's integer =id= or =-1= if there is none
+
+* GIVENS
+** A directed graph of people =nodes=, connected by =knowing= others
+** Just because =a= =knows= =b=, it does not necessarily follow that =b= knows =a= 
+** A method =knows(a: Person, b: Person) => Boolean= to check whether =a= knows =b=
+** A =celebrity= is someone whom everybody in the graph knows
+** =node= =ids= range from =0= to =population_count - 1=, or =N=
+
+* Algorithms
+** Brute force
+*** O(population_count^2)
+** Check "known knowns"
+*** Make a queue of possible celebrities: at first, the set (0..N)
+*** Until the queue is empty or the celebrity is found:
+**** Take the =node= with the lowest remaining =id= off the queue and set it to =current_node=
+**** Check if =current_node= is the celebrity
+     i.e., every other =knows(other, current_node)= is true for every node from (0..N) but =current_node= itself
+**** If so, =return current_node=!
+**** If not, replace the queue with the union of itself and the =nodes= that =current_node= knows
+     This means that at each step, the queue is filtered down to only the set of
+     people that every single one of previously-checked =nodes= has =known=: if
+     even a single =node= doesn't know a member of the queue, they will get
+     filtered out by the union
+*** O(N * ???) where =???= = (1 + (something derived from some average of how many people each person =node= knows. Maybe logarithmically??))

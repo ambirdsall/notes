@@ -1,0 +1,23 @@
+#+title Web Server
+
+A project with a more and less ambitious version, or it can be done in two
+stages. Once the raspberry pi has the right libraries installed and can run a
+server, it is simply a matter of making sure its IP address is static to be able
+to access it on the local network.
+
+To access it from the wider world is trickier; I don't believe it's possible to
+access it via a URL, because DNS services will not forward internet traffic to
+any old where; but the bare IP address of the router will connect to it
+directly, rather than via a DNS server like normal. The trick is to forward
+traffic to the router at port 80 (i.e. internet traffic) to the pi, which has a
+web server program listening on that port and will generate the response.
+
+* Pi
+** Install nginx
+** Get addresses in order
+*** Configure static IP address for pi
+*** Get the router's IP address ("gateway" something may be related)
+** Set up postgres
+* Router
+
+#+STARTUP: content

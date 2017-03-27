@@ -1,0 +1,111 @@
+[email: g@gayle.com subject: fbprep] gets an autoreply with slides etc
+
+5m [prior exp]
+35m [question #1 / question #2] # ideally two, assuming competence and no overrunning conversation earlier
+5m [questions FOR interviewer]
+
+# Resume walkthrough
+  1 sentence or so on present work/place
+  bit about background
+  hobbies - I really like creative problem solving within logical constraints; thus:
+          music (writing and performing)
+          rock climbing
+          to a lesser degree, crosswords / chess
+
+  2. 3+ projects
+    hard/cool
+    I was central
+    technical depth
+
+    What did _I_ do? What would I do differently?
+
+Design Questions:
+  fundamental approach: What Would You Do At Work?
+
+  1. Scope the problem
+    Define terms, figure out assumptions
+  2. Design sketch
+    informal diagram; high-level, "breadth-first"
+
+  It's a collaborative discussion that I'm driving. So drive! Lead the way, be open about issues, take feedback, tweak as needed, etc.
+
+How to prepare:
+  1. Read about design of major companies
+    Think, don't memorize
+  2. Know key concepts
+    Tasks, sharding, caches
+    Web stack, REST, etc
+> 3. Practice back-of-the-envelope calculations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+# Algorithm Questions
+  At least willing, ideally excited by hard problems
+  [particular note on tries, the data structure]
+
+> Big O is a big deal! Not just basic knowledge, but some fluency wanted. The ability to easily, freely discuss complexity of any given algorithm.
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  PREP
+    MASTER Big O
+    Implement Data Structures/Algorithms
+    Code on paper/whiteboard
+    Mock interviews
+
+BIG O
+  Don't be afraid to drop the "N": O(N) for what N? Is that nested loop O(N^2) or O(A * B)?
+  So pick more semantic variables and be rigorous about using them
+  Ignoring unknown calculations (what does that function do?) Just because a function is called O(N) times doesn't mean it's O(N) overall.
+
+  Reminders
+    drop constants
+    don't drop non-constants
+    different cariables
+    avoid "n"
+    add vs. multiply
+    recursion call tree
+
+SOLVING ALGORITHMS
+  Not expected:
+    to know the answers
+    to solve immediately
+    to code perfectly
+  Expected:
+    be excited about hard problems
+    drive!
+      keep trying when stuck
+      more than just "correct"
+    pay attention to interviewer
+    write real code
+
+  Listen for clues!
+    If e.g. it is mentioned that the input is sorted, that's almost certaintly useful
+
+  Draw an example:
+    big enough
+    avoid special cases: only one match, easy index placement, etc. Make it a bit of work to solve.
+
+  Get the entire algorithm in place mentally before starting to code. Don't just power through!
+
+  Code style matters, even on a whiteboard!
+    Stuff like modularity, e.g., sometimes hard to evaluate. But style is ALWAYS there to be judged.
+
+> EXAMPLE CASES VS TEST CASES
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    A good example case is a bit big, to avoid obvious special cases, etc.
+    A good test case is small and targeted; doesn't take unnecessary time, and tests one clear thing
+      First small, basic cases;
+      then edge cases;
+      then, if there's time, bigger cases
+
+    Mind the difference between testing the code and testing the algorithm
+
+  AND ALWAYS BE SURE TO
+  * create example
+    big (tiny is useless)
+    generic (not a special case)
+  * walk through it
+    figure out the output for that one input
+    (Don't worry about algorithm/implementation, just common sense through it and observe how an actual brain approaches it pragmatically)
+  * DON'T CODE UNTIL YOU'RE READY
+
+

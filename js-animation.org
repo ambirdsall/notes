@@ -1,0 +1,73 @@
+* window.requestAnimationFrame()
+  The window.requestAnimationFrame() method tells the browser that you
+  wish to perform an animation and requests that the browser call a
+  specified function to update an animation before the next
+  repaint. The method takes as an argument a callback to be invoked
+  before the repaint.
+
+  An optimization over, say,
+  src_javascript{ window.setTimeout(drawFrame, 1000/60); } (60 FPS),
+  which doesn't have reliable timing.
+* mouse events
+** mousedown
+** mouseup
+** click
+** dblclick
+** wheel
+** mousemove
+** mouseenter
+** mouseleave
+** contextmenu
+	right-click
+* touch events
+** touchstart
+** touchend
+** touchmove
+* keyboard events
+** keyup
+** keydown
+* <canvas> Drawing API
+** strokeStyle
+** fillStyle
+** lineWidth
+** lineCap
+	How the end point of each line is drawn, if it's flat, round, or
+	sticks out. Possible values: *butt, round, square*
+** lineJoin
+	Determines how connecting segments are joined together, or how the
+	"elbow" of the connection is drawn. Possible values: *miter, round, bevel*
+** miterLimit
+	When used with lineHoin set to miter, this property determines how
+	far the outside connection point will be placed from he inside
+	connection point. It must be a finite number > 0; default is 10
+** save()
+** restore()
+** beginPath()
+** closePath()
+** stroke()
+** lineTo(x, y)
+** moveTo(x, y)
+** quadraticCurveTo(cpx, cpy, x, y)
+** bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)
+** arcTo(x1, y1, x2, y2, radius)
+** arc(x, y, radius, startAngle, endAngle [, counterclockwise])
+** createLinearGradient(x0, y0, x1, y1)
+** createRadialGradient(x0, y0, r0, x1, y1, r1)
+** clearRect(x, y, height)
+** fillRect(x, y, width, height)
+
+
+* formulae to memorize:
+  #+BEGIN_SRC javascript
+# position by trig
+  radians = degrees * Math.PI / 180
+  degrees = radians * 180/ Math.PI
+  x positions => cosine
+  y positions => sine
+# color ain't nothing but a number
+  red = color >> 16 & 0xFF
+  green = color >> 8 & 0xFF
+  blue = color & 0xFF
+  color = red << 16 | green << 8 | blue
+#
+  #+END_SRC

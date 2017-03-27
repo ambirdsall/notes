@@ -1,0 +1,9 @@
+| MODEL           | WIDTH | GOOD OR NAH |
+|-----------------+-------+-------------|
+| Google Nexus 10 |  1280 |             |
+| iphone 6+       |   414 |             |
+| Google Nexus 4  |   384 |             |
+| iphone 6        |   375 |             |
+| Google Nexus 5  |   360 |             |
+| blackberry z30  |   360 |             |
+| iphone 4/5      |   320 |             |

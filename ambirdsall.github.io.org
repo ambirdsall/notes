@@ -1,0 +1,55 @@
+#+TODO: TODO STARTED | DONE NOT_NOW DONE_FOR_NOW
+AMBIRDSALL.GITHUB.IO -*- mode: org -*-
+
+* THE PAGE
+** TITLE
+** TRIANGLE THING
+*** link: "what is that?"
+**** written description
+**** code
+** WHO I IS
+** Picture of me? Might look like shit, given background
+** LINKS TO STUFF
+*** sudoku_solver
+*** github/reading_list
+*** github/teeny_server
+*** github/world-clock IFF I customize the app (geolocation? Hours diff between current time zone and selected city?)
+* homepage spruce-up
+** TODO increase vertical spacing
+** TODO make body text a slightly lighter shade of blue
+** TODO write a set of fucking tests.
+Much of this is straightforward
+1. given =var dot_count, MAX_DOT_COUNT=
+	+ while =dot_count < MAX_DOT_COUNT=, scrolling grows =dot_count=
+	+ once =dot_count === MAX_DOT_COUNT=, scrolling does not grow =dot_count=
+	+ once =dot_count === MAX_DOT_COUNT=, scrolling scrolls
+
+
+
+* portfolio pieces
+** TODO audreydilling.com
+*** TODO what is it even?
+** TODO sudoku solver
+*** DONE fumigate old code
+**** DONE migrate old tests to jasmine
+**** DONE make utilities object
+***** DONE make object itself
+***** DONE call all utility functions as such
+**** DONE add comments
+*** DONE presentation
+*** TODO explanation
+*** TODO logic
+**** TODO when you type a number it is added to the board as well as the screen
+**** TODO unsolvable board
+***** TODO display message
+***** TODO highlight doubles in case of multiples of digit x in same row/col/box?
+** TODO musanim
+*** aubio is an open-source C library for audio analysis
+	 [ ] aubioonset :: detects temporal starting points
+	 [ ] aubiopitch :: detects frequencies
+	 [X] aubionotes :: uses both to extract symbolic musical data from an audio source and emit MIDI-like data
+*** has python API!
+*** find easiest python (micro)?framework, make back-end
+*** ember front-end
+** TODO teeny server
+*** TODO write man page

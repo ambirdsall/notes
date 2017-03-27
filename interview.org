@@ -1,0 +1,244 @@
+* Structure of a facebook interview
+** 5m [prior exp]
+** 35m [question *1 / question #2] # ideally two, assuming competence and no overrunning conversation earlier
+** 5m [questions FOR interviewer]
+
+
+* Resume walkthrough
+** sentence or so on present work/place
+*** bit about background
+*** hobbies
+    I really like creative problem solving within logical constraints; thus:
+**** music (writing and performing)
+**** rock climbing
+**** to a lesser degree, crosswords / chess
+** 3+ projects
+*** What did *I* do? What would I do differently?
+*** RIO
+    Build a parser! Design to gracefully handle expansion of orthogonal concerns (new citation types, new sources)! Tests!
+*** TraxPayroll single-sign-on integration
+sha256 encryption! Time windows! Incomplete and inconsistent docs!
+*** Greenhouse.io integration
+    Extract "Build new employee" interactor (wtf did it not exist before?); clean, self-contained, tested code! TOO isolated, tbh, because of mess.
+
+* Algorithm Questions
+** Good applicants are excited about hard problems
+** Big O is a big deal
+   Not just basic knowledge, but some fluency wanted. The ability to easily, freely discuss complexity of any given algorithm.
+*** Use different variables for different quantities in the algorithm
+*** *do not* ignore unknown calculations (/what does that function do?/)
+    Just because a function is called =O(N)= times doesn't mean it's =O(N)= overall.
+*** When in doubt, don't use the name =N=
+    =O(N)= for what =N=?
+    Is that nested loop =O(N^2)= or =O(A * B)=?
+    Pick more semantic variables and be rigorous about using them
+*** =O(A + B)= != =O(A * B)=
+*** don't forget the recursion call tree!
+*** Reminders
+     drop constants
+     don't drop non-constants
+     avoid "n"
+** Data Structures
+*** Linked Lists
+*** Trees
+    Assume binary unless otherwise specified
+**** Heap: priority queue (min or max)
+**** Search
+**** AVL
+**** Red/Black
+*** Tries
+**** Tries are a type of tree where each =node= identifies itself; its parent; and its children by some =key=
+**** The =key= of a =node= represents a datum in a sequence
+***** Thus, each try represents something like a set of possible words that all start with the same root letter
+*** Stacks
+*** Queues
+*** Vectors / ArrayLists
+*** Hash Tables
+*** Graphs 
+**** directed
+**** undirected
+** Algorithms
+*** breadth-first search
+*** depth-first search
+*** binary search
+*** merge sort
+*** quick sort
+*** tree insert/find/etc
+*** graph algorithms
+**** Dijkstra's algorithm (shortest path from A to B)
+***** starting at node =A=, prioritize all =A's= neighbors by their distance from =A=
+****** Let's say =A= has neighbors =E=, =C=, and =D=; and =E= is closer than =C=, which is in turn closer than =D=
+***** The closest node, =E=, is visited first; identities of visited nodes are 
+***** For each of of =E='s neighbors:
+****** update its distance if going through =E= is shorter than the old shortest path
+******* i.e., if the distance =A -> E -> D= is shorter than =A -> D=, update the priority of =D= to match the shortest available route
+****** if it hasn't yet been enqueued or visited, add it to the queue
+***** That's about it; follow the shortest available paths first, until you've either found your destination or exhausted the possible paths
+**** A* (shortest path)
+     A refinement of Dijkstra's algorithm which fills its priority queue by
+     setting priorities that not only take into account the distance to each
+     next node, but also use some heuristic to approximate its remaining
+     distance to the target. The heuristic must be such that the actual distance
+     from any node is *ALWAYS* equal to or closer than the estimate.
+**** Depth-first search (find)
+     SCHEDULED: <2017-03-01 Wed>
+**** Breadth-first search (find)
+** Concepts
+*** bit manipulation
+    In ruby:
+    | operator | definition        | example                               |
+    |----------+-------------------+---------------------------------------|
+    | &        | AND               | 0101 & 0011 == 0001                   |
+    | ^        | XOR               | 0101 ^ 0011 == 0110                   |
+    | <bar>    | OR                | 0101 <bar> 0011 == 0111               |
+    | >>, <<   | RIGHT, LEFT SHIFT | 0101 >> 2 == 01; 0101 << 3 == 0101000 |
+    | ~        | NOT               | ~0101 == 1010 # Mind integer signing  |
+
+*** singleton design pattern
+*** factory design pattern
+*** memory
+**** stack
+***** Thread-specific
+***** FIFO
+***** handles function calls/contexts
+***** statically allocated data
+***** generally better performance, due to data locality
+**** heap 
+***** application-level, i.e. *shared between all threads*
+*** recursion
+*** big-o time and space
+** Prep
+*** MASTER Big O
+*** Implement Data Structures/Algorithms
+*** Code on paper/whiteboard
+*** Mock interviews
+** When Solving Algorithms
+*** Not expected:
+**** to know the answers
+**** to solve immediately
+**** to code perfectly
+*** Expected:
+**** be excited about hard problems
+**** drive!
+***** keep trying when stuck
+***** don't stop at "correct": optimize! modularize! refactor!
+**** pay attention to interviewer
+**** write real code
+*** Listen for clues!
+**** If e.g. it is mentioned that the input is sorted, that's almost certaintly useful
+
+*** Draw an example:
+**** big enough
+**** avoid special cases: only one match, easy index placement, etc. Make it a bit of work to solve.
+*** Get the entire algorithm in place mentally before starting to code. Don't just power through!
+*** Code style matters, even on a whiteboard!
+    Architectural ability can be hard to evaluate. But style is ALWAYS there to be judged, so BE CONSISTENT.
+** Choosing Test, Example Cases
+*** A good example case is a bit big, to avoid obvious special cases, etc.
+*** A good test case is small and targeted; doesn't take unnecessary time, and tests one clear thing
+**** First small, basic cases;
+**** then edge cases;
+**** then, if there's time, bigger cases
+*** testing the code and testing the algorithm are different activities which require different cases
+** ALWAYS BE SURE TO
+*** create example
+**** big (tiny is useless)
+**** generic (not a special case)
+*** walk through it
+**** figure out the output for that one input
+**** (Don't worry about algorithm/implementation, just common sense through it and observe how an actual brain approaches it pragmatically)
+** *For the Love of God, Don't Code Until You're Ready*
+* Design Questions:
+** Fundamental approach: What Would You Do At Work?
+*** Scope the problem
+    Define terms, figure out assumptions
+*** Design sketch
+    informal diagram; high-level, "breadth-first"
+
+** It's a collaborative discussion that I'm driving. So drive!
+   Lead the way, be open about issues, take feedback, tweak as needed, etc.
+** How to prepare:
+*** Read about design of major companies
+    Think, don't memorize
+*** Know key concepts
+    Tasks, sharding, caches
+    Web stack, REST, etc
+*** *Practice back-of-the-envelope calculations*
+
+* Top Ten Mistakes Candidates Make 
+** Practicing on a computer
+** Not rehearsing behavioral questions
+** Not doing a mock interview
+** Trying to memorize solutions
+** Talking too much
+** Talking too little
+** Rushing
+** Not debugging
+** Sloppy coding
+** Giving up
+* My own personal job grid
+| Project         | Most challenging                         | What I learned                           | Most Interesting                                             | Hardest Bug                     | Enjoyed Most                          | Conflicts with Teammates                                                                         |
+|-----------------+------------------------------------------+------------------------------------------+--------------------------------------------------------------+---------------------------------+---------------------------------------+--------------------------------------------------------------------------------------------------|
+| Magoosh         | learning patterns, clean code            | Production quality                       | A/B library;                                                 |                                 |                                       |                                                                                                  |
+| Lawfetcher      | Adapting to evolving requirements        | Testing, functional tricks, DDP          |                                                              | Not instantiating test Citation | Code design; cleanliness              | N/A                                                                                              |
+| Flock           | Complexity; bad git hygene; no sleep     | got hella fast at git; many antipatterns |                                                              | params[:p]                      | Greenhouse integration                | Importance of architecture/modularity; features vs fixes vs refactoring; careless data practices |
+| RIO             | working solo, with no external structure | sundry tools                             | Expanding logic to more full-featured parser                 |                                 | Full test suite; no startup bullshit  | N/A                                                                                              |
+| EmojiDictionary | Vague goals                              | PHP                                      | Implementing logging, server scripts, other "standard" tools | N/A                             | Refactoring out primary "emoji" class | N/A                                                                                              |
+* Nontechnical Questions
+** Questions from [[https://www.nytimes.com/guides/business/how-to-hire-the-right-person]["How to Hire the Right Person"]], NYT
+*** What is your natural strength?
+**** What is the point of this question?
+     A person’s natural strength is not about their current title or what they
+     studied in college. It is a particular skill or ability that, for them, comes
+     as naturally as breathing but that others may find difficult. Other ways to
+     ask this question: If everybody is in the top 5 percent of the world at some
+     skill, what is yours? Or what is your ninja skill?
+*** What kind of animal would you be? And why?
+**** What is the point of this question?
+     This may strike you as silly, but the answer can tell you a lot, particularly
+     when candidates explain why they chose a certain animal. If you want to test
+     it before you use it in a job interview, try it out at your next dinner
+     party.
+
+     Ask enough people this question, and you’re likely to hear some surprising
+     answers, and gain valuable insights that will tell you whether they’re right for
+     the job. The chief executive who often asks this question, for example, says
+     that if she’s hiring somebody for sales, she likes to hear a predator as the
+     answer, like a lion. If somebody is going to be working in teams all the time, a
+     social animal may be the right answer. The “why?” part of the answer will also
+     tell you a lot about their level of self-awareness.
+*** What qualities of your parents do you like the most?
+**** What is the point of this question?
+     We’re all influenced by our parents, often more than we’d like to admit. So
+     it’s a good bet that the answers to this question will reveal a lot about the
+     candidate. You can also ask how these qualities come out in their daily
+     lives.
+
+     One chief executive takes this question a step further and asks people about
+     the qualities of their parents they like the least. (That may be a bit too
+     heavy for some people, though.)
+*** What is the biggest misperception people have about you?
+**** What is the point of this question?
+     The answers to this question will reveal candidates’ level of self-awareness.
+     Do they know how they come across to others, even in ways that may not be a
+     true reflection of who they are?
+
+     This can also be a bit of a trick question, too, because what really matters
+     is how people perceive you – in a sense, there is no such thing as
+     misperception; in this context, perception is reality.
+
+     Tony Hsieh, the chief executive of Zappos.com, uses this question often.
+     Here’s what he’s listening for with this approach: “I think it’s a
+     combination of how self-aware people are and how honest they are. I think if
+     someone is self-aware, then they can always continue to grow. If they’re not
+     self-aware, I think it’s harder for them to evolve or adapt beyond who they
+     already are.”
+* My Questions for [large company]
+** Opportunities for career advancement besides management?
+** Favorite part of engineering at [large company]?
+*** Any experience with other companies, esp. startups?
+** Opportunities to learn machine learning/more CS- and math-heavy skills with big data?
+*** linear algebra
+*** graph theory
+*** machine learning
+    TensorFlow seems pretty interesting and well-designed, and uses graphs of composable linear functions to encode training/testing on data

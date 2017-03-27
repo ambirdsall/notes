@@ -1,0 +1,61 @@
+VIM :: four functions and two classes, each of which has
+a handful of attributes and methods.
+
+Functions in the VIM module
+VIM::message(msg)
+VIM::set_option(arg)
+VIM::command(cmd)
+VIM::evaluate(expr)
+
+VIM::message(msg)
+This displays the string msg on the bottom line (where you usually type ex
+commands).
+
+VIM::set_option(arg)
+This sets a Vim option just as :set would.
+
+VIM::command(cmd)
+This executes an ex command.
+
+VIM::evaluate(expr)
+This evaluates expr using Vim’s internal expression evaluator (see :help
+expression ) and returns the result as a string.
+
+Classes in the VIM module
+
+VIM::Buffer
+  global variables:
+    $curbuf # the current buffer object
+
+  class methods:
+    current # Returns the current buffer object
+    count   # Returns the number of buffers
+    self[n] # Returns buffer object n (the first buffer is numbered 0)
+
+  instance methods
+    name           # Returns the name of the buffer
+    number         # Returns the number of the buffer
+    count          # Returns the number of lines
+    length         # Returns the number of lines
+    self[n]        # Returns line n from the buffer (the first line is numbered 1)
+    self[n] = str  # Sets line n in the buffer to str
+    delete(n)      # Deletes line n from the buffer
+    append(n, str) # Appends a line containing str after line n
+
+
+VIM::Window
+  This class represents a window, which is your view into a buffer. A global
+  variable, $curwin, represents the current window, also accessible as
+  VIM::Window.current.
+
+  class methods
+    current # Returns the current window object
+    count   # Returns the number of windows
+    self[n] # Returns window object n (the first window is numbered 0)
+
+  instance methods
+    buffer              # Returns the buffer object displayed in the window
+    height              # Returns the height of the window
+    height = n          # Sets the window height to n
+    cursor              # Returns a [row, col] array for the cursor position
+    cursor = [row, col] # Sets the cursor position to row and col

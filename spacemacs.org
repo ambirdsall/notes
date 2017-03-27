@@ -1,0 +1,7 @@
+* buffers
+* windows
+* workspaces
+* jumping around
+** avy (easymotion equivalent)
+   - [<SPC> j j] for one char
+   - [<SPC> j J] for two
